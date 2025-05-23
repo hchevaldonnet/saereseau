@@ -1,0 +1,14 @@
+ip address add 172.22.180.1/26 dev eth0
+ip link set up dev eth0
+ip address add 172.22.180.2/26 dev eth1
+ip link set up dev eth1
+ip address add 172.22.180.3/26 dev eth2
+ip link set up dev eth2
+ip address add 172.22.180.4/26 dev eth3
+ip link set up dev eth3
+ip route add 172.22.180.0/26 via 172.22.180.1
+ip route add 172.22.160.0/24 via 172.22.180.1
+ip route add 172.22.181.0/24 via 172.22.180.1
+ip route add 172.22.176.0/22 via 172.22.180.1
+iptables -t nat -A POSTROUTING -o eth3 -j MASQUERADE
+cp /shared/resolv.conf /etc/resolv.conf

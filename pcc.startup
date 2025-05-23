@@ -1,0 +1,8 @@
+while ! ip a show eth0 |
+	grep -q "inet "; do
+		dhclient eth0
+		sleep 5
+	done
+cp /shared/resolv.conf /etc/resolv.conf
+cp /shared/interfaces /etc/network/interfaces
+cp /shared/isc-dhcp-server /etc/default/isc-dhcp-server
